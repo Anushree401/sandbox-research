@@ -295,24 +295,65 @@ def build_nothing_reply(query: str, author: str) -> str:
 # ---------------------------------------------------------------------------
 
 
+def parse_owl_comment(body: str):
+    """
+    Match any natural 'owl' invocation and return (command, query_or_None).
+
+    Trigger examples:
+        owl, how do I fork a repo?
+        dear owl, what is a PR?
+        oh wise owl — how does markdown work?
+        hey owl! zenodo
+        owl off / owl on
+
+    Returns:
+        ('off', None)       — silence command
+        ('on', None)        — resume command
+        ('query', str)      — query text (original case)
+        None                — not an owl comment
+    """
+    # Pattern: optional preamble ("dear", "oh wise", "hey", etc.), then "owl",
+    # then an optional separator (comma / dash / colon / !? / whitespace),
+    # then the rest.
+    m = re.match(
+        r"^(?:[\w\s]*?\b)?owl\b[,\-:!?\s]+(.+)$",
+        body.strip(),
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not m:
+        # bare "owl off" / "owl on" with no separator
+        bare = re.match(r"^(?:[\w\s]*?\b)?owl\s+(off|on)\s*$", body.strip(), re.IGNORECASE)
+        if bare:
+            return (bare.group(1).lower(), None)
+        return None
+
+    rest = m.group(1).strip()
+    if re.match(r"^off\s*$", rest, re.IGNORECASE):
+        return ("off", None)
+    if re.match(r"^on\s*$", rest, re.IGNORECASE):
+        return ("on", None)
+    return ("query", rest)
+
+
 def main():
     body = COMMENT_BODY.strip()
-    body_lower = body.lower()
 
-    # Must start with @how-to
-    if not body_lower.startswith("@how-to"):
-        print("Not a @how-to comment — exiting.")
+    parsed = parse_owl_comment(body)
+    if parsed is None:
+        print("Not an owl comment — exiting.")
         return
 
-    # @how-to off
-    if body_lower == "@how-to off":
+    command, query = parsed
+
+    # owl off
+    if command == "off":
         add_reaction(COMMENT_ID, "CONFUSED")
         add_label_to_discussion("owl-silenced")
         print("Owl silenced.")
         return
 
-    # @how-to on
-    if body_lower == "@how-to on":
+    # owl on
+    if command == "on":
         remove_label_from_discussion("owl-silenced")
         add_reaction(COMMENT_ID, "HOORAY")
         print("Owl re-enabled.")
@@ -329,12 +370,6 @@ def main():
         print("Comment is from the bot itself — exiting.")
         return
 
-    # Extract query (must have something after "@how-to ")
-    if not body_lower.startswith("@how-to "):
-        print("No query after @how-to — exiting.")
-        return
-
-    query = body[len("@how-to "):].strip()
     if not query:
         print("Empty query — exiting.")
         return

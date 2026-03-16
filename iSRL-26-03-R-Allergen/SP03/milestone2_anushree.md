@@ -28,12 +28,12 @@ Jurisdictions: United States (FALCPA + FASTER Act) and Japan
 - NOTE: PAL IS PROHIBITED IN JAPAN (allegedly, not sure)
 - NOTE: USDA FAS report is not a truly primary source
 	i. which allergens must be declared on food labels?
-		- primary source 1: [Food Labeling Act plus] (https://www.japaneselawtranslation.go.jp/en/laws/view/2601/en)
+		- primary source 1: [Food Labeling Act plus](https://www.japaneselawtranslation.go.jp/en/laws/view/2601/en)
 			- what it answers: that allergen information is a required labeling item, and that there is a list of specified ingredients to be disclosed, chaper 2,3,4
 	ii. are allergens labeled regardless of quantity or only above thresholds?
-		- primary source: [USDA/FAS report "Japan – An Overview of the Food Labeling Standard" (2014)](https://www.fas.usda.gov/data/japan-overview-food-labeling-standard)
-			- what it answers: it lists the seven as egg, milk, buckwheat, wheat, peanuts, crab, shrimp/prawn, and the 20 "recommended" items, notes that the "Standard requires that all allergens be individually labeled (e.g., dried egg yolk (including egg))"
-	iii. are "may contain" / precautionary labels required, regulated, or voluntary?
+		- primary source: [USDA/FAS report “Japan – An Overview of the Food Labeling Standard” (2014)](https://www.fas.usda.gov/data/japan-overview-food-labeling-standard)
+			- what it answers: it lists the seven as egg, milk, buckwheat, wheat, peanuts, crab, shrimp/prawn, and the 20 “recommended” items, notes that the “Standard requires that all allergens be individually labeled (e.g., dried egg yolk (including egg))”
+	iii. are “may contain” / precautionary labels required, regulated, or voluntary?
 		- primary source: Consumer Affairs Agency guidance and standards relating to voluntary allergen labeling
 			- what it answers:  USDA/FAS overview hints that previous law allowed omission of potential allergens and that new standards require individual labeling, which is about mandatory ingredients
 	iv. how must allergen information appear on the package?
